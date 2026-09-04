@@ -36,3 +36,87 @@
     transform: rotate(360deg);
   }
 }
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #222;
+  border-radius: 15px;
+}
+
+.display {
+  height: 70px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  background-color: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 35px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.buttons button {
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #222;
+  border-radius: 15px;
+}
+
+.display {
+  height: 70px;
+  margin-bottom: 15px;
+  padding: 0 15px;
+  background-color: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 35px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.buttons button {
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+.buttons button:last-child {
+  grid-column: span 4;
+}
