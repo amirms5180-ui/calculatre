@@ -7,42 +7,92 @@ const initialstate = {
 
    current:"0",
    gabli:null,
-   operator:null
+   operator:null,
+   number:false,
+   display:"0"
 }
 function reducer(state,action){
  
-    if (action.type === "number") {
+    if (action.type === "number" ) {
 
   if (action.payload === "." && state.current.includes(".")) {
     return state;
   }
 
-  return {
-    ...state,
-    current:
-      state.current === "0"
-        ? action.payload
-        : state.current + action.payload
-  };
-}
+ return {
+  ...state,
+
+  current: state.number
+    ? action.payload
+    : state.current === "0"
+      ? action.payload
+      : state.current + action.payload,
+
+  number: false,
+
+  display: state.number
+    ? state.display + " " + action.payload
+    : state.display === "0"
+      ? action.payload
+      : state.display + action.payload
+};
+    }
 
     if(action.type=== "clear")
       return{
-
         ...state,
-        current :"0",
+        display :"0",
          gabli: null,
-         operator: null
+         operator: null,
+         current:"0"
       }
     
-    if(action.type=== "operator")
+    if(action.type=== "operator"){
+
+       if (state.operator !== null) {
+
+        const gabli =Number(state.gabli);
+        const current =Number(state.current)
+         if (state.operator !== null && state.number === true) {
+         return state;
+         }
+
+        let result;
+
+        if(state.operator=== "+"){
+          result =gabli + current;
+        }
+        if(state.operator=== "-"){
+          result =gabli - current;
+        }
+        if(state.operator=== "*"){
+          result =gabli * current;
+        }
+        if(state.operator=== "/"){
+          result =gabli / current;
+        }
+         return{
+       ...state,
+      current:result,
+      gabli:result,
+      operator:action.payload,
+      number:true,
+      display: state.display + " " + action.payload
+         }
+       }
+
+    
       return{
     ...state,
+      
       gabli:state.current,
       operator:action.payload,
-      current:"0"
+      number:true,
+      display: state.current + " " + action.payload
       
-      }
+      }}
+      console.log("initialstate.gabli")
+      
       if(action.type ==="eaqul"){
         const gabli = Number(state.gabli);
         const current = Number(state.current);
@@ -50,7 +100,9 @@ function reducer(state,action){
           const plus =gabli+current
           return{
             ...state,
-            current:plus
+
+            current:plus,
+            display:String(plus)
 
           }
         }
@@ -59,7 +111,8 @@ function reducer(state,action){
           const mines =gabli-current
           return{
             ...state,
-            current:mines
+            current:mines,
+            display:String(mines)
 
           }
         }
@@ -67,7 +120,8 @@ function reducer(state,action){
           const times =gabli*current
           return{
             ...state,
-            current:times
+            current:times,
+            display:String(times)
 
           }
         }
@@ -76,7 +130,8 @@ function reducer(state,action){
           const devie =gabli/current 
           return{
             ...state,
-            current:devie
+            current:devie,
+            display:String(devie)
 
           }
         }
@@ -93,7 +148,7 @@ function App() {
    <div className="calculator">
 
       <div className="display">
-        {state.current}
+        {state.display}
       </div>
 
       <div className="buttons">
